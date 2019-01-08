@@ -21,9 +21,6 @@ using namespace std;
 #define FOR(i,n) for(int i=0; i<n; i++)
 #define X first
 #define Y second
-#define arrinput for(int i=0; i<n; i++) cin>>arr[i];
-#define sumarr for(int i=0; i<n; i++) sum+=arr[i];
-#define memarr memset(arr, 0, sizeof(arr));
 #define for0(i,n) for(int i=0; i<n; i++)
 #define for1(i,n) for(int i=1; i<=n; i++)
 #define forr(i,n) for(int i=n-1; i>=0; i--)
@@ -34,6 +31,8 @@ typedef vector<int> vi;
 typedef vector<pii> vii;
 typedef vector<int> BigInt;
 
+
+ 
 
 class BigInteger {
 
@@ -52,42 +51,79 @@ private:
 public:
 
     BigInt anoopam;
+	int size;
+    // BigInteger() {}    // need to maket this 
 
-	BigInteger(string s) {
-		BigInt ans;
-		//if(s[0] == '-') return ans; // Negatives not allowed
-		if(s.size() == 0) {
-			ans.push_back(0);
-			//return ans;
-		}
-		while(s.size()%9 != 0) s = '0'+s;
-		for(int i=0; i<s.size(); i+=9) {
-			int x = 0;
-			for(int j=i; j<i+9; j++) x = x*10 + (s[j]-'0');
-			ans.insert(ans.begin(), x);
-		}
-		Set(ans);
-        	anoopam = ans;
-		//return ans;
-	}
+    BigInteger(const char* c) {
+        string s = "";
+        for(int i=0; i<strlen(c); i++) s = s+c[i]; // n^2 change this ASAP
+        BigInt ans;
+        //if(s[0] == '-') return ans; // Negatives not allowed
+        if(s.size() == 0) {
+            ans.push_back(0);
+            //return ans;
+        }
+        while(s.size()%9 != 0) s = '0'+s;
+        for(int i=0; i<s.size(); i+=9) {
+            int x = 0;
+            for(int j=i; j<i+9; j++) x = x*10 + (s[j]-'0');
+            ans.insert(ans.begin(), x);
+        }
+        Set(ans);
+        this->anoopam = ans;
+        this->size = ans.size();
+    }
 
-    // BigInteger(char c[]) {
-    //     string s = "";
-    //     for(int i=0; i<strlen(c); i++) s = s+c[i]; // n^2 change this ASAP
-    //     BigInteger(s);      
-    // }
-    // BigInteger(ll x) {
-    //     string s = "";
-    //     while(x>0) { s = (char)(x%10+'0') + s; x /= 10; }  // n^2 here also
-    //     BigInteger(s);
-    // }
+    BigInteger(string s) {
+        BigInt ans;
+        //if(s[0] == '-') return ans; // Negatives not allowed
+        if(s.size() == 0) {
+            ans.push_back(0);
+            //return ans;
+        }
+        while(s.size()%9 != 0) s = '0'+s;
+        for(int i=0; i<s.size(); i+=9) {
+            int x = 0;
+            for(int j=i; j<i+9; j++) x = x*10 + (s[j]-'0');
+            ans.insert(ans.begin(), x);
+        }
+        Set(ans);
+        this->anoopam = ans;
+        this->size = ans.size();
+    }
+
+    BigInteger(ll x) {
+        string s = "";
+        while(x>0) { s = (char)(x%10+'0') + s; x /= 10; }  // n^2 here also
+        BigInt ans;
+        //if(s[0] == '-') return ans; // Negatives not allowed
+        if(s.size() == 0) {
+            ans.push_back(0);
+            //return ans;
+        }
+        while(s.size()%9 != 0) s = '0'+s;
+        for(int i=0; i<s.size(); i+=9) {
+            int x = 0;
+            for(int j=i; j<i+9; j++) x = x*10 + (s[j]-'0');
+            ans.insert(ans.begin(), x);
+        }
+        Set(ans);
+        this->anoopam = ans;
+        this->size = ans.size();
+    }
+
     // BigInteger(int x) {
     //     BigInteger((ll) x);
     // }
 	
-	
 	friend ostream & operator << (ostream &out, const BigInteger &vec);
 	friend istream & operator >> (istream &in, BigInteger &vec);
+	friend bool operator < (BigInteger&, BigInteger&);
+	friend bool operator > (BigInteger&, BigInteger&);
+	friend bool operator == (BigInteger&, BigInteger&);
+	friend bool operator != (BigInteger&, BigInteger&);
+	friend bool operator <= (BigInteger&, BigInteger&);
+	friend bool operator >= (BigInteger&, BigInteger&);
 	
 };
 
@@ -110,11 +146,50 @@ istream & operator >> (istream &in, BigInteger &vec) {
 	return in;
 }
 
+bool operator < (BigInteger& b1, BigInteger& b2) {
+	// Set(b1);
+	// Set(b2);
+	BigInt i1=b1.anoopam, i2=b2.anoopam;
+	if(i1.size() != i2.size()) return (i1.size() < i2.size());
+	for(int i=i1.size()-1; i>=0; i--) {
+		if(i1[i] != i2[i]) return (i1[i] < i2[i]);
+	}
+	return false;
+}
+
+bool operator > (BigInteger& b1, BigInteger& b2) {
+	return (b2 < b1);
+}
+
+bool operator == (BigInteger& b1, BigInteger& b2) {
+	return (!(b1 < b2) && !(b2 < b1));
+}
+
+bool operator != (BigInteger& b1, BigInteger& b2) {
+	return !(b1 == b2);
+}
+
+bool operator <= (BigInteger& b1, BigInteger& b2) {
+	return (b1 < b2 || b1 == b2);
+}
+
+bool operator >= (BigInteger& b1, BigInteger& b2) {
+	return (b2 < b1 || b1 == b2);
+}
+
 int main() 
 {
-
-    BigInteger A = BigInteger("123456789987654321");
+    string str = "123456789987654321";
+    string str1 = "323456789987654321";
+    char ch[] = "123456789987654321";
+    BigInteger A = BigInteger(str);
     cout<<A;
+    BigInteger B = BigInteger(str1);
+    cout<<B;
+    bool x = B<A;
+    cout<<x<<"\n";
+    x = A<B;
+    cout<<x<<"\n";
 
     return 0;
 }
