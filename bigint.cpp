@@ -92,7 +92,7 @@ public:
         this->size = ans.size();
     }
 
-    BigInteger(ll x) {
+    BigInteger(long long x) {
         string s = "";
         while(x>0) { s = (char)(x%10+'0') + s; x /= 10; }  // n^2 here also
         BigInt ans;
@@ -124,7 +124,18 @@ public:
 	friend bool operator != (BigInteger&, BigInteger&);
 	friend bool operator <= (BigInteger&, BigInteger&);
 	friend bool operator >= (BigInteger&, BigInteger&);
-	
+	friend bool operator < (BigInteger&, long long&);
+	friend bool operator > (BigInteger&, long long&);
+	friend bool operator == (BigInteger&, long long&);
+	friend bool operator != (BigInteger&, long long&);
+	friend bool operator <= (BigInteger&, long long&);
+	friend bool operator >= (BigInteger&, long long&);
+	friend bool operator < (long long&, BigInteger&);
+	friend bool operator > (long long&, BigInteger&);
+	friend bool operator == (long long&, BigInteger&);
+	friend bool operator != (long long&, BigInteger&);
+	friend bool operator <= (long long&, BigInteger&);
+	friend bool operator >= (long long&, BigInteger&);
 };
 
 void Print(BigInteger ans) {
@@ -175,6 +186,54 @@ bool operator <= (BigInteger& b1, BigInteger& b2) {
 
 bool operator >= (BigInteger& b1, BigInteger& b2) {
 	return (b2 < b1 || b1 == b2);
+}
+
+bool operator < (BigInteger& b1, long long& b2) {
+    return b1 < BigInteger(b2);
+}
+
+bool operator > (BigInteger& b1, long long& b2) {
+    return b1 > BigInteger(b2);
+}
+
+bool operator == (BigInteger& b1, long long& b2) {
+    return b1 == BigInteger(b2);
+}
+
+bool operator != (BigInteger& b1, long long& b2) {
+    return b1 != BigInteger(b2);
+}
+
+bool operator <= (BigInteger& b1, long long& b2) {
+    return b1 <= BigInteger(b2);
+}
+
+bool operator >= (BigInteger& b1, long long& b2) {
+    return b1 >= BigInteger(b2);
+}
+
+bool operator < (long long& b1, BigInteger& b2) {
+    return BigInteger(b1) < b2;
+}
+
+bool operator > (long long& b1, BigInteger& b2) {
+    return BigInteger(b1) > b2;
+}
+
+bool operator == (long long& b1, BigInteger& b2) {
+    return BigInteger(b1) == b2;
+}
+
+bool operator != (long long& b1, BigInteger& b2) {
+    return BigInteger(b1) != b2;
+}
+
+bool operator <= (long long& b1, BigInteger& b2) {
+    return BigInteger(b1) <= b2;
+}
+
+bool operator >= (long long& b1, BigInteger& b2) {
+    return BigInteger(b1) >= b2;
 }
 
 int main() 
