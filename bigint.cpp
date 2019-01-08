@@ -189,51 +189,63 @@ bool operator >= (BigInteger& b1, BigInteger& b2) {
 }
 
 bool operator < (BigInteger& b1, long long& b2) {
-    return b1 < BigInteger(b2);
+    BigInteger b3 = BigInteger(b2);
+    return b1 < b3;
 }
 
 bool operator > (BigInteger& b1, long long& b2) {
-    return b1 > BigInteger(b2);
+    BigInteger b3 = BigInteger(b2);
+    return b3 < b1;
 }
 
 bool operator == (BigInteger& b1, long long& b2) {
-    return b1 == BigInteger(b2);
+    BigInteger b3 = BigInteger(b2);
+    return b1 == b3;
 }
 
 bool operator != (BigInteger& b1, long long& b2) {
-    return b1 != BigInteger(b2);
+    BigInteger b3 = BigInteger(b2);
+    return b1 != b3;
 }
 
 bool operator <= (BigInteger& b1, long long& b2) {
-    return b1 <= BigInteger(b2);
+    BigInteger b3 = BigInteger(b2);
+    return b1 <= b3;
 }
 
 bool operator >= (BigInteger& b1, long long& b2) {
-    return b1 >= BigInteger(b2);
+    BigInteger b3 = BigInteger(b2);
+    return b1 >= b3;
 }
 
 bool operator < (long long& b1, BigInteger& b2) {
-    return BigInteger(b1) < b2;
+    BigInteger b3 = BigInteger(b1);
+    return b3 < b2;
 }
 
 bool operator > (long long& b1, BigInteger& b2) {
-    return BigInteger(b1) > b2;
+    BigInteger b3 = BigInteger(b1);
+    return b2 < b3;
 }
 
 bool operator == (long long& b1, BigInteger& b2) {
-    return BigInteger(b1) == b2;
+    BigInteger b3 = BigInteger(b1);
+    return b3 == b2;
 }
 
 bool operator != (long long& b1, BigInteger& b2) {
-    return BigInteger(b1) != b2;
+    BigInteger b3 = BigInteger(b1);
+    return b3 != b2;
 }
 
 bool operator <= (long long& b1, BigInteger& b2) {
-    return BigInteger(b1) <= b2;
+    BigInteger b3 = BigInteger(b1);
+    return b3 <= b2;
 }
 
 bool operator >= (long long& b1, BigInteger& b2) {
-    return BigInteger(b1) >= b2;
+    BigInteger b3 = BigInteger(b1);
+    return b3 >= b2;
 }
 
 int main() 
