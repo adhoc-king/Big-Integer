@@ -52,7 +52,7 @@ public:
 
     BigInt anoopam;
 	int size;
-    // BigInteger() {}    // need to maket this 
+    // BigInteger() {}    // need to make this 
 
     BigInteger(const char* c) {
         string s = "";
@@ -248,6 +248,16 @@ bool operator >= (long long& b1, BigInteger& b2) {
     return b3 >= b2;
 }
 
+BigInteger max(BigInteger b1, BigInteger b2) {
+    if(b1 < b2) return b2;
+    return b1;
+}
+
+BigInteger min(BigInteger b1, BigInteger b2) {
+    if(b1 < b2) return b1;
+    return b2;
+}
+
 int main() 
 {
     string str = "123456789987654321";
@@ -257,10 +267,11 @@ int main()
     cout<<A;
     BigInteger B = BigInteger(str1);
     cout<<B;
-    bool x = B<A;
-    cout<<x<<"\n";
-    x = A<B;
-    cout<<x<<"\n";
+    // bool x = B<A;
+    // cout<<x<<"\n";
+    // x = A<B;
+    // cout<<x<<"\n";
+    cout<<max(A,B);
 
     return 0;
 }
